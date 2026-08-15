@@ -5,7 +5,7 @@ public class Driver {
     private String sex;
     private Car car;
 
-    Driver(int id,String name,boolean active,String sex){
+    Driver(int id,String name,boolean active,String sex,Car car){
         this.id = id;
         this.name = name;
         this.active = active;
@@ -27,6 +27,10 @@ public class Driver {
 
      boolean isActive(){
         return active;
+     }
+
+     void vehicleInfo(Car car){
+         System.out.println(car.carInfo());
      }
 
 
