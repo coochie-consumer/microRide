@@ -7,9 +7,6 @@ import java.sql.SQLException;
 
 public class Driver {
 
-    static int nextid = 1000;
-
-
     private int driverId;
     private String name;
     private boolean active;
@@ -17,84 +14,79 @@ public class Driver {
     private Car car;
     private double rating;
 
-    Driver(String name,boolean active,String sex,Car car,double rating){
-//        this.driverId = nextid++;
-
-
+    public Driver(
+            String name,
+            boolean active,
+            String sex,
+            Car car,
+            double rating
+    ) {
         this.name = name;
         this.active = active;
         this.sex = sex;
         this.car = car;
         this.rating = rating;
     }
-//nested car class
 
-
-     void becomeActive(){
-         System.out.println("Driver is now active");
+    void becomeActive() {
+        System.out.println("Driver is now active");
         active = true;
-     }
+    }
 
-    void becomeInactive(){
+    void becomeInactive() {
         System.out.println("Driver is now inactive");
         active = false;
     }
 
-     boolean isActive(){
+    boolean isActive() {
         return active;
-     }
+    }
 
-     void vehicleInfo(){
-         car.carInfo();
-     };
+    void vehicleInfo() {
+        car.carInfo();
+    }
 
-     void driverInfo(){
-         System.out.println(name);
-         System.out.println(driverId);
-         vehicleInfo();
-     }
+    void driverInfo() {
+        System.out.println(name);
+        System.out.println(driverId);
+        vehicleInfo();
+    }
 
-     public void CreateNewDriver() throws SQLException {
-         String sql = """
-                 INSERT INTO driver(fullname,active,sex,car,rating)
-                 values(?, ?, ?, ?, ?)
-                 RETURNING driverid;
-                 """;
+    public void createNewDriver() {
 
-         try (
-                 Connection connection =
-                         DatabaseConnection.getConnection();
+        String sql = """
+                INSERT INTO driver (fullname, active, sex, car, rating)
+                VALUES (?, ?, ?, ?, ?)
+                RETURNING driver_id
+                """;
 
-                 PreparedStatement statement =
-                         connection.prepareStatement(sql)
-         ) {
-             statement.setString(1, this.name);
-             statement.setBoolean(2, this.active);
-             statement.setString(3, this.sex);
-             statement.setString(4, this.car.toString());
-             statement.setDouble(5, this.rating);
+        try (
+                Connection connection =
+                        DatabaseConnection.getConnection();
 
-             try (ResultSet result = statement.executeQuery()) {
-                 if (result.next()) {
-                     this.driverId =
-                             result.getInt("driver_id");
-                 }
-             }
+                PreparedStatement statement =
+                        connection.prepareStatement(sql)
+        ) {
+            statement.setString(1, this.name);
+            statement.setBoolean(2, this.active);
+            statement.setString(3, this.sex);
+            statement.setString(4, this.car.carInfo());
+            statement.setDouble(5, this.rating);
 
-             System.out.println(
-                     "Driver inserted with ID: " + driverId
-             );
+            try (ResultSet result = statement.executeQuery()) {
+                if (result.next()) {
+                    this.driverId =
+                            result.getInt("driver_id");
+                }
+            }
 
-         } catch (SQLException e) {
-             System.out.println("Could not insert driver:");
-             System.out.println(e.getMessage());
-         }
-     }
-     }
+            System.out.println(
+                    "Driver inserted with ID: " + driverId
+            );
 
-
-
-
-
-//the driver class currently contains the method needed for
-//creating a new driver...these fields will be sent into the postgresql db
+        } catch (SQLException e) {
+            System.out.println("Could not insert driver:");
+            System.out.println(e.getMessage());
+        }
+    }
+}

@@ -19,8 +19,9 @@
             this.isAC = isAC;
         }
 
-        void carInfo(){
-            System.out.println(this.year + " " + this.make + " " + this.model );
+        String carInfo(){
+//            System.out.println(this.year + " " + this.make + " " + this.model );
+            return this.year + " " + this.make + " " + this.model;
         }
     }
 

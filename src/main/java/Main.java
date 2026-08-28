@@ -24,15 +24,13 @@ public class Main {
         Driver driver7 = new Driver("Duffour", true, "Male", car7, 4.4);
         Driver driver8 = new Driver("Twuiwaa", false, "Female", car8, 4.8);
         Driver driver9 = new Driver("Gbadebo", true, "Male", car9, 4.6);
-        Driver driver10 = new Driver("kukua", true, "Female", car10, 5.0);
+        Driver driver10 = new Driver("kukua Aliko", true, "Female",car2 , 5.0);
         ArrayList<Driver> drivers = new ArrayList<>(List.of(driver1, driver2, driver3, driver4, driver5, driver6, driver7, driver8, driver9, driver10));
 
 
         Rider rider1 = new Rider(11,"kunle", "Male",false,"osu","legon");
 
-
-        driver1.CreateNewDriver();
-        driver1.driverInfo();
+    driver10.createNewDriver();
 
 
 
