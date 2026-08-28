@@ -31,8 +31,7 @@ public class Main {
         Rider rider1 = new Rider(11,"kunle", "Male",false,"osu","legon");
 
 
-
-
+        driver1.CreateNewDriver();
         driver1.driverInfo();
 
 

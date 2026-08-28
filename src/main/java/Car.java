@@ -1,4 +1,5 @@
  public class Car{
+        int CarId;
         int year;
         String make;
         String model;
@@ -7,8 +8,10 @@
 
 
 
+
         //         constructors
         Car(String make,String model,int seatNumber,boolean isAC,int year){
+//            CarId = 0;
             this.year = year;
             this.make = make;
             this.model = model;
